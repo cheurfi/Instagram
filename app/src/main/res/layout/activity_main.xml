@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.MainActivity">
+
+    <Button
+            android:id="@+id/start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Choose a picture!"/>
+
+    <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/buttons"/>
+
+<!--    <include-->
+<!--            android:id="@+id/processing_options"-->
+<!--            layout="@layout/processing_options"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintBottom_toTopOf="@id/start"-->
+<!--            android:layout_marginBottom="20dp"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:visibility="invisible"/>-->
+
+    <LinearLayout
+            android:id="@+id/buttons"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="10dp"
+            app:layout_constraintBottom_toTopOf="@id/start">
+
+        <ImageView
+                android:id="@+id/binary"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_invert"
+                android:layout_weight="1"/>
+
+        <ImageView
+                android:id="@+id/contrast"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_contrast"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"/>
+
+        <ImageView
+                android:id="@+id/blur"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_blur"
+                android:layout_marginStart="20dp"
+                android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
