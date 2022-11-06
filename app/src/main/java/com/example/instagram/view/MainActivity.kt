@@ -7,16 +7,14 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.example.instagram.R
 import com.example.instagram.helper.ImageProcessor
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var bitmap: Bitmap
     private lateinit var helper: ImageProcessor
@@ -33,37 +31,21 @@ class MainActivity : BaseActivity() {
         }
 
         binary.setOnClickListener {
-            launch {
-                processedImage = helper.makeBlackWhite(bitmap)
-                image.setImageBitmap(processedImage)
-            }
-            launch {
-                withContext(Dispatchers.IO) {
-                    helper.saveToFile(processedImage, this@MainActivity)
-                }
-            }
+            processedImage = helper.makeBlackWhite(bitmap)
+            helper.saveToFile(processedImage, this@MainActivity)
+            image.setImageBitmap(processedImage)
         }
 
         contrast.setOnClickListener {
             processedImage = helper.increaseContrast(bitmap, 3f, 70f)
             image.setImageBitmap(processedImage)
-
-            launch {
-                withContext(Dispatchers.IO) {
-                    helper.saveToFile(processedImage, this@MainActivity)
-                }
-            }
+            helper.saveToFile(processedImage, this@MainActivity)
         }
 
         blur.setOnClickListener {
-            processedImage = helper.blur(bitmap, this)
+            processedImage = helper.blur(bitmap, this@MainActivity)
             image.setImageBitmap(processedImage)
-
-            launch {
-                withContext(Dispatchers.IO) {
-                    helper.saveToFile(processedImage, this@MainActivity)
-                }
-            }
+            helper.saveToFile(processedImage, this@MainActivity)
         }
     }
 
@@ -86,7 +68,8 @@ class MainActivity : BaseActivity() {
     }
 
     private fun requestPermission() {
-        val permission = ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permission =
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
                 this,
